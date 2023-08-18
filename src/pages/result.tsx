@@ -216,10 +216,32 @@ export default function ResultPage() {
             `}>
 
             <Button onClick={() => {
-              Kakao.current.Link.sendScrap({
-                requestUrl: window.location.href,
-                templateId: 97453,
-              })
+              // Kakao.current.Link.sendScrap({
+              //   requestUrl: window.location.href,
+              //   templateId: 97453,
+              // })
+              Kakao.current.Link.sendDefaultButton({
+                objectType: "feed",
+                content: {
+                  title: "클파 MBTI 테스트",
+                  description: "친구의 결과를 확인해보세요!",
+                  imageUrl:
+                    "/images/share.jpg",
+                  link: {
+                    mobileWebUrl: window.location.href,
+                    webUrl: window.location.href,
+                  },
+                },
+                buttons: [
+                  {
+                    title: "지금 확인하기",
+                    link: {
+                      mobileWebUrl: window.location.href,
+                      webUrl: window.location.href,
+                    },
+                  },
+                ],
+              });
             }}>카카오톡 공유하기</Button>
             <Button onClick={() => {
               reset();
