@@ -86,7 +86,6 @@ export default function ResultPage() {
   };
   
   useEffect(() => {
-    return;
       const Kakao = (window as any).Kakao;
       Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
       Kakao.Link.createDefaultButton({
