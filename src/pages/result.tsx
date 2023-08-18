@@ -166,7 +166,7 @@ export default function ResultPage() {
               flex-direction: column;
               justify-content: space-between;
               height: 100%;
-              gap: 50px;
+              gap: 45px;
             `}
           >
             <div
@@ -217,6 +217,7 @@ export default function ResultPage() {
               display: flex;
               flex-direction: column;
               gap: 10px;
+              margin-bottom: 20px;
             `}>
             <Button id="kakao-share-button">
               결과 공유하기
