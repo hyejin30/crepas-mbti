@@ -91,13 +91,13 @@ export default function ResultPage() {
   };
 
   useEffect(() => {
-    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+    // window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
   }, []);
 
   return (
     <>
       <Head>
-        <title>{`나의 클BTI - ${type}`}</title>
+        <title>나의 클파 MBTI를 알아보자</title>
         <meta name="description" content="크레파스에서 나의 성격 유형은?" />
       </Head>
       <div
@@ -106,6 +106,7 @@ export default function ResultPage() {
           flex-direction: column;
           align-items: center;
           padding: 40px 30px 0px;
+          overflow: auto;
         `}
       >
         <Link
@@ -209,11 +210,23 @@ export default function ResultPage() {
                 </div>
               ))}
             </div>
+            <div css={css`
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+            `}>
+
             <Button onClick={() => {
               window.Kakao.Link.sendScrap({
                 requestUrl: window.location.href,
+                templateId: 97453,
               })
             }}>결과 공유하기</Button>
+            <Button onClick={() => {
+              router.push("/");
+              reset();
+            }}>처음으로 돌아가기</Button>
+            </div>
           </section>
         </header>
       </div>
