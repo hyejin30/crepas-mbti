@@ -10,4 +10,4 @@
 
 <img width="1067" alt="image" src="https://github.com/hyejin30/crepas-mbti/assets/98295004/20f824ad-e01e-4621-948d-b207274d590e">
 
-<img width="249" alt="image" src="https://github.com/hyejin30/crepas-mbti/assets/98295004/e3c2034d-de55-4974-9779-85752f34c55f">
+<img width="500" alt="image" src="https://github.com/hyejin30/crepas-mbti/assets/98295004/e3c2034d-de55-4974-9779-85752f34c55f">
