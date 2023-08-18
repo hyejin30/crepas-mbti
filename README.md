@@ -7,3 +7,7 @@
 프로젝트 특징
 - 모바일에 최적화된 UI (PC 고려 X)
 - MBTI 결과를 카카오톡으로 공유할 수 있음
+
+<img width="1067" alt="image" src="https://github.com/hyejin30/crepas-mbti/assets/98295004/20f824ad-e01e-4621-948d-b207274d590e">
+
+<img width="249" alt="image" src="https://github.com/hyejin30/crepas-mbti/assets/98295004/e3c2034d-de55-4974-9779-85752f34c55f">
