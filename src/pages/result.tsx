@@ -218,7 +218,7 @@ export default function ResultPage() {
 
             <Button onClick={() => {
               window.Kakao.Link.sendScrap({
-                requestUrl: router.asPath,
+                requestUrl: `https://crepas-mbti-2023.vercel.app/result?type=${type}`,
                 templateId: 97453,
               })
             }}>결과 공유하기</Button>
