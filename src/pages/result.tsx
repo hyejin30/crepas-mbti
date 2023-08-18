@@ -8,6 +8,7 @@ import Script from "next/script";
 import { useMemo } from "react";
 import { useResetRecoilState } from "recoil";
 
+
 const MBTI_LIST = [
   [
     {
@@ -62,14 +63,15 @@ const MBTI_LIST = [
 export default function ResultPage() {
   const theme = useTheme();
   const router = useRouter();
-
-  const type = router.query.type as string;
+  const type = router.query.type;
 
   const typeDesc = useMemo(() => {
     return MBTI_LIST.reduce((acc, currentType, i) => {
-      const item = currentType.find((el) => el.type === type[i]);
-      if (item) {
-        acc.push({ type: item.type, desc: item.desc, text: item.text });
+      if (typeof type === 'string') {
+        const item = currentType.find((el) => el.type === type[i]);
+        if (item) {
+          acc.push({ type: item.type, desc: item.desc, text: item.text });
+        }
       }
       return acc;
     }, []);
@@ -105,8 +107,8 @@ export default function ResultPage() {
                 description: 크레파스에서 나의 성격 유형은?,
                 imageUrl: /images/share.jpg,
                 link: {
-                  mobileWebUrl: ${window.location.href},
-                  webUrl: ${window.location.href}
+                  mobileWebUrl: ${typeof window !== 'undefined' ? window.location.href : ""},
+                  webUrl: ${typeof window !== 'undefined' ? window.location.href : ""},
                 }
               }
             });
