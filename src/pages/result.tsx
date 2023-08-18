@@ -86,6 +86,7 @@ export default function ResultPage() {
   };
   
   useEffect(() => {
+    return;
       const Kakao = (window as any).Kakao;
       Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
       Kakao.Link.createDefaultButton({
@@ -124,7 +125,7 @@ export default function ResultPage() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 6cqmax 30px 0px;
+          padding: 40px 30px 0px;
           overflow: auto;
         `}
       >
@@ -133,14 +134,13 @@ export default function ResultPage() {
             display: flex;
             flex-direction: column;
             height: 100%;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
           `}
         >
           <div
             css={css`
               line-height: 1.5;
               text-align: center;
-              margin-bottom: 30px;
             `}
           >
             <div
@@ -160,13 +160,14 @@ export default function ResultPage() {
               {type}
             </div>
           </div>
+          </header>
           <section
             css={css`
               display: flex;
               flex-direction: column;
               justify-content: space-between;
               height: 100%;
-              gap: 50px;
+              gap: 40px;
             `}
           >
             <div
@@ -227,7 +228,6 @@ export default function ResultPage() {
             }}>처음으로 돌아가기</Button>
             </div>
           </section>
-        </header>
       </div>
     </>
   );
