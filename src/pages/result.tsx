@@ -35,7 +35,7 @@ const MBTI_LIST = [
     },
     {
       type: "N",
-      desc: "night",
+      desc: "ight",
       text: "뒷풀이는 밤샘을 좋아하며",
     },
   ],

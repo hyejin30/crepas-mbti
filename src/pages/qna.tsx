@@ -109,7 +109,7 @@ export default function QnaPage() {
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            font-size: var(--font-large);
+            font-size: 32px;
             line-height: 1.5;
             white-space: pre-wrap;
             text-align: center;
