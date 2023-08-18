@@ -242,7 +242,7 @@ export default function ResultPage() {
                   },
                 ],
               });
-            }}>카카오톡 공유하기</Button>
+            }}>결과 공유하기</Button>
             <Button onClick={() => {
               reset();
               router.push("/");
