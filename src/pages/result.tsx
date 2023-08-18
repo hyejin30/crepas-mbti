@@ -91,7 +91,7 @@ export default function ResultPage() {
   };
 
   useEffect(() => {
-    // window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
   }, []);
 
   return (
