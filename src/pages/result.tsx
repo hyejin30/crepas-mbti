@@ -218,6 +218,7 @@ export default function ResultPage() {
 
             <Button onClick={() => {
               window.Kakao.Link.sendScrap({
+                requestUrl: window.location.href,
                 templateId: 97453,
               })
             }}>결과 공유하기</Button>
