@@ -215,12 +215,13 @@ export default function ResultPage() {
               gap: 10px;
             `}>
 
-            <Button onClick={() => {
+            <Button className="kakao-share-button" onClick={() => {
               // Kakao.current.Link.sendScrap({
               //   requestUrl: window.location.href,
               //   templateId: 97453,
               // })
               Kakao.current.Link.createDefaultButton({
+                containter: ".kakao-share-button",
                 objectType: "feed",
                 content: {
                   title: "클파 MBTI 테스트",
