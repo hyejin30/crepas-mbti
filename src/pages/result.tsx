@@ -80,14 +80,17 @@ export default function ResultPage() {
   const resetStep = useResetRecoilState(stepState);
   const resetType = useResetRecoilState(typeState);
 
+  
   const reset = () => {
     resetStep();
     resetType();
   };
-
+  
   useEffect(() => {
-    Kakao.current = (window as any).Kakao;
-    Kakao.current.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+    if (!Kakao.current) {
+      Kakao.current = (window as any).Kakao;
+      Kakao.current.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+    }
   }, [Kakao]);
 
   return (
@@ -217,7 +220,7 @@ export default function ResultPage() {
                 requestUrl: window.location.href,
                 templateId: 97453,
               })
-            }}>결과 공유하기</Button>
+            }}>카카오톡 공유하기</Button>
             <Button onClick={() => {
               reset();
               router.push("/");
