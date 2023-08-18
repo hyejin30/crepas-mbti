@@ -7,12 +7,6 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
 import { useResetRecoilState } from "recoil";
 
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
-
 
 const MBTI_LIST = [
   [
@@ -69,6 +63,7 @@ export default function ResultPage() {
   const theme = useTheme();
   const router = useRouter();
   const type = router.query.type;
+  const Kakao = (window as any).Kakao;
 
   const typeDesc = useMemo(() => {
     return MBTI_LIST.reduce((acc, currentType, i) => {
@@ -91,8 +86,8 @@ export default function ResultPage() {
   };
 
   useEffect(() => {
-    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-  }, []);
+    Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+  }, [Kakao]);
 
   return (
     <>
@@ -217,14 +212,14 @@ export default function ResultPage() {
             `}>
 
             <Button onClick={() => {
-              window.Kakao.Link.sendScrap({
+              Kakao.Link.sendScrap({
                 requestUrl: window.location.href,
                 templateId: 97453,
               })
-            }}>카카오톡 공유하기</Button>
+            }}>결과 공유하기</Button>
             <Button onClick={() => {
-              router.push("/");
               reset();
+              router.push("/");
             }}>처음으로 돌아가기</Button>
             </div>
           </section>
