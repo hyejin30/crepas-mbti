@@ -4,9 +4,14 @@ import { css, useTheme } from "@emotion/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Script from "next/script";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useResetRecoilState } from "recoil";
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 
 const MBTI_LIST = [
@@ -85,38 +90,16 @@ export default function ResultPage() {
     resetType();
   };
 
+  useEffect(() => {
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+  }, []);
+
   return (
     <>
       <Head>
         <title>{`나의 클BTI - ${type}`}</title>
         <meta name="description" content="크레파스에서 나의 성격 유형은?" />
       </Head>
-      <Script
-        id="kakao"
-        strategy="afterInteractive"
-        src="https://developers.kakao.com/sdk/js/kakao.js"
-        dangerouslySetInnerHTML={{
-          __html: `
-          Kakao.init('266d7b479a9fc8fe530be74837ecff19');
-          
-          document.getElementById('kakao-share-button').addEventListener('click', function() {
-            Kakao.Link.sendDefault({
-              objectType: 'feed',
-              content: {
-                title: ${`나의 클BTI - ${type}`},
-                description: 크레파스에서 나의 성격 유형은?,
-                imageUrl: /images/share.jpg,
-                link: {
-                  mobileWebUrl: ${typeof window !== 'undefined' ? window.location.href : ""},
-                  webUrl: ${typeof window !== 'undefined' ? window.location.href : ""},
-                }
-              }
-            });
-          });
-          
-          `,
-        }}
-      />
       <div
         css={css`
           display: flex;
@@ -226,7 +209,11 @@ export default function ResultPage() {
                 </div>
               ))}
             </div>
-            <Button id="kakao-share-button">결과 공유하기</Button>
+            <Button onClick={() => {
+              window.Kakao.Link.sendScrap({
+                requestUrl: window.location.href,
+              })
+            }}>결과 공유하기</Button>
           </section>
         </header>
       </div>
