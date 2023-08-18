@@ -166,7 +166,7 @@ export default function ResultPage() {
               flex-direction: column;
               justify-content: space-between;
               height: 100%;
-              gap: 40px;
+              gap: 50px;
             `}
           >
             <div
