@@ -86,6 +86,8 @@ export default function ResultPage() {
   };
   
   useEffect(() => {
+      return;
+
       const Kakao = (window as any).Kakao;
       Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
       Kakao.Link.createDefaultButton({
@@ -124,32 +126,16 @@ export default function ResultPage() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 40px 30px 0px;
+          padding: 6cqmax 30px 0px;
           overflow: auto;
         `}
       >
-        <Link
-          css={css`
-            width: 100%;
-            position: absolute;
-            top: 0;
-            padding: 20px 0;
-            background: ${theme.color.pink};
-            font-size: var(--font-medium);
-            color: ${theme.color.white};
-            text-align: center;
-          `}
-          href="/"
-          onClick={reset}
-        >
-          크레파스 MBTI
-        </Link>
         <header
           css={css`
             display: flex;
             flex-direction: column;
             height: 100%;
-            margin: 60px 0 50px;
+            margin-bottom: 50px;
           `}
         >
           <div
