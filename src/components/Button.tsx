@@ -1,5 +1,5 @@
 import { Interpolation, Theme, css, useTheme } from "@emotion/react";
-import { HTMLAttributes } from "react";
+import { ClassAttributes, HTMLAttributes } from "react";
 
 export const Button = ({
   variant = "pink",
@@ -8,7 +8,7 @@ export const Button = ({
 }: {
   css?: Interpolation<Theme>;
   variant?: "pink" | "white";
-} & HTMLAttributes<HTMLButtonElement>) => {
+} & ClassAttributes<HTMLButtonElement> & HTMLAttributes<HTMLButtonElement>) => {
   const theme = useTheme();
 
   return (

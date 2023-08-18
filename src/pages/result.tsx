@@ -63,7 +63,6 @@ export default function ResultPage() {
   const theme = useTheme();
   const router = useRouter();
   const type = router.query.type;
-  const Kakao = useRef<any>(null);
 
   const typeDesc = useMemo(() => {
     return MBTI_LIST.reduce((acc, currentType, i) => {
@@ -87,11 +86,32 @@ export default function ResultPage() {
   };
   
   useEffect(() => {
-    if (!Kakao.current) {
-      Kakao.current = (window as any).Kakao;
-      Kakao.current.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-    }
-  }, [Kakao]);
+      const Kakao = (window as any).Kakao;
+      Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+      Kakao.Link.createDefaultButton({
+        container: "#kakao-share-button",
+        objectType: "feed",
+        content: {
+          title: "클파 MBTI 테스트",
+          description: "친구의 결과를 확인해보세요!",
+          imageUrl:
+            "/images/share.jpg",
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+        buttons: [
+          {
+            title: "지금 확인하기",
+            link: {
+              mobileWebUrl: window.location.href,
+              webUrl: window.location.href,
+            },
+          },
+        ],
+      });
+  }, []);
 
   return (
     <>
@@ -214,36 +234,9 @@ export default function ResultPage() {
               flex-direction: column;
               gap: 10px;
             `}>
-
-            <Button className="kakao-share-button" onClick={() => {
-              // Kakao.current.Link.sendScrap({
-              //   requestUrl: window.location.href,
-              //   templateId: 97453,
-              // })
-              Kakao.current.Link.createDefaultButton({
-                containter: ".kakao-share-button",
-                objectType: "feed",
-                content: {
-                  title: "클파 MBTI 테스트",
-                  description: "친구의 결과를 확인해보세요!",
-                  imageUrl:
-                    "/images/share.jpg",
-                  link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href,
-                  },
-                },
-                buttons: [
-                  {
-                    title: "지금 확인하기",
-                    link: {
-                      mobileWebUrl: window.location.href,
-                      webUrl: window.location.href,
-                    },
-                  },
-                ],
-              });
-            }}>결과 공유하기</Button>
+            <Button id="kakao-share-button">
+              결과 공유하기
+            </Button>
             <Button onClick={() => {
               reset();
               router.push("/").then(router.reload);
