@@ -220,7 +220,7 @@ export default function ResultPage() {
               //   requestUrl: window.location.href,
               //   templateId: 97453,
               // })
-              Kakao.current.Link.sendDefaultButton({
+              Kakao.current.Link.createDefaultButton({
                 objectType: "feed",
                 content: {
                   title: "클파 MBTI 테스트",
@@ -245,7 +245,7 @@ export default function ResultPage() {
             }}>결과 공유하기</Button>
             <Button onClick={() => {
               reset();
-              router.push("/");
+              router.push("/").then(router.reload);
             }}>처음으로 돌아가기</Button>
             </div>
           </section>
