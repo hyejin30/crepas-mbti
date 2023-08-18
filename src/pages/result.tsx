@@ -4,7 +4,7 @@ import { css, useTheme } from "@emotion/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useResetRecoilState } from "recoil";
 
 
@@ -63,7 +63,7 @@ export default function ResultPage() {
   const theme = useTheme();
   const router = useRouter();
   const type = router.query.type;
-  const Kakao = (window as any).Kakao;
+  const Kakao = useRef<any>(null);
 
   const typeDesc = useMemo(() => {
     return MBTI_LIST.reduce((acc, currentType, i) => {
@@ -86,7 +86,8 @@ export default function ResultPage() {
   };
 
   useEffect(() => {
-    Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+    Kakao.current = (window as any).Kakao;
+    Kakao.current.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
   }, [Kakao]);
 
   return (
@@ -212,7 +213,7 @@ export default function ResultPage() {
             `}>
 
             <Button onClick={() => {
-              Kakao.Link.sendScrap({
+              Kakao.current.Link.sendScrap({
                 requestUrl: window.location.href,
                 templateId: 97453,
               })
