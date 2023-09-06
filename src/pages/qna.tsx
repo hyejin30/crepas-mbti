@@ -128,7 +128,18 @@ export default function QnaPage() {
             margin: 30px 0 40px;
           `}
         >
-          <Image alt="description image" src={`/images/qna${step}.jpg`} fill />
+          {step === 0 && (
+            <Image alt="description image" src="/images/qna0.jpg" fill />
+          )}
+          {step === 1 && (
+            <Image alt="description image" src="/images/qna1.jpg" fill />
+          )}
+          {step === 2 && (
+            <Image alt="description image" src="/images/qna2.jpg" fill />
+          )}
+          {step === 3 && (
+            <Image alt="description image" src="/images/qna3.jpg" fill />
+          )}
         </div>
         <div
           css={css`
