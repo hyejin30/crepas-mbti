@@ -2,11 +2,9 @@ import { stepState, typeState } from "@/atoms/app";
 import { Button } from "@/components/Button";
 import { css, useTheme } from "@emotion/react";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo } from "react";
 import { useResetRecoilState } from "recoil";
-
 
 const MBTI_LIST = [
   [
@@ -66,7 +64,7 @@ export default function ResultPage() {
 
   const typeDesc = useMemo(() => {
     return MBTI_LIST.reduce((acc, currentType, i) => {
-      if (typeof type === 'string') {
+      if (typeof type === "string") {
         const item = currentType.find((el) => el.type === type[i]);
         if (item) {
           acc.push({ type: item.type, desc: item.desc, text: item.text });
@@ -79,38 +77,36 @@ export default function ResultPage() {
   const resetStep = useResetRecoilState(stepState);
   const resetType = useResetRecoilState(typeState);
 
-  
   const reset = () => {
     resetStep();
     resetType();
   };
-  
+
   useEffect(() => {
-      const Kakao = (window as any).Kakao;
-      Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-      Kakao.Link.createDefaultButton({
-        container: "#kakao-share-button",
-        objectType: "feed",
-        content: {
-          title: "클파 MBTI 테스트",
-          description: "친구의 결과를 확인해보세요!",
-          imageUrl:
-            "/images/share.jpg",
+    const Kakao = (window as any).Kakao;
+    Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+    Kakao.Link.createDefaultButton({
+      container: "#kakao-share-button",
+      objectType: "feed",
+      content: {
+        title: "클파 MBTI 테스트",
+        description: "친구의 결과를 확인해보세요!",
+        imageUrl: "/images/share.jpg",
+        link: {
+          mobileWebUrl: window.location.href,
+          webUrl: window.location.href,
+        },
+      },
+      buttons: [
+        {
+          title: "지금 확인하기",
           link: {
             mobileWebUrl: window.location.href,
             webUrl: window.location.href,
           },
         },
-        buttons: [
-          {
-            title: "지금 확인하기",
-            link: {
-              mobileWebUrl: window.location.href,
-              webUrl: window.location.href,
-            },
-          },
-        ],
-      });
+      ],
+    });
   }, []);
 
   return (
@@ -132,7 +128,6 @@ export default function ResultPage() {
           css={css`
             display: flex;
             flex-direction: column;
-            height: 100%;
             margin-bottom: 20px;
           `}
         >
@@ -159,75 +154,78 @@ export default function ResultPage() {
               {type}
             </div>
           </div>
-          </header>
-          <section
+        </header>
+        <section
+          css={css`
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            gap: 45px;
+          `}
+        >
+          <div
             css={css`
               display: flex;
               flex-direction: column;
-              justify-content: space-between;
-              height: 100%;
-              gap: 45px;
+              gap: 25px;
+              width: 100%;
+              padding: 30px;
+              box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
             `}
           >
-            <div
-              css={css`
-                display: flex;
-                flex-direction: column;
-                gap: 25px;
-                width: 100%;
-                padding: 30px;
-                box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
-              `}
-            >
-              {typeDesc.map((item, i) => (
+            {typeDesc.map((item, i) => (
+              <div
+                key={`type-${i}`}
+                css={css`
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px;
+                `}
+              >
                 <div
-                  key={`type-${i}`}
                   css={css`
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
+                    font-size: var(--font-large);
                   `}
                 >
-                  <div
+                  <span
                     css={css`
-                      font-size: var(--font-large);
+                      color: ${theme.color.pink};
                     `}
                   >
-                    <span
-                      css={css`
-                        color: ${theme.color.pink};
-                      `}
-                    >
-                      {item.type}
-                    </span>
-                    <span>{item.desc}</span>
-                  </div>
-                  <div
-                    css={css`
-                      font-size: 18px;
-                      word-break: keep-all;
-                    `}
-                  >
-                    {item.text}
-                  </div>
+                    {item.type}
+                  </span>
+                  <span>{item.desc}</span>
                 </div>
-              ))}
-            </div>
-            <div css={css`
+                <div
+                  css={css`
+                    font-size: 18px;
+                    word-break: keep-all;
+                  `}
+                >
+                  {item.text}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div
+            css={css`
               display: flex;
               flex-direction: column;
               gap: 10px;
               margin-bottom: 20px;
-            `}>
-            <Button id="kakao-share-button">
-              결과 공유하기
+            `}
+          >
+            <Button id="kakao-share-button">결과 공유하기</Button>
+            <Button
+              onClick={() => {
+                reset();
+                router.push("/").then(router.reload);
+              }}
+            >
+              처음으로 돌아가기
             </Button>
-            <Button onClick={() => {
-              reset();
-              router.push("/").then(router.reload);
-            }}>처음으로 돌아가기</Button>
-            </div>
-          </section>
+          </div>
+        </section>
       </div>
     </>
   );
