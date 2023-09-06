@@ -99,7 +99,9 @@ export default function QnaPage() {
         css={css`
           display: flex;
           flex-direction: column;
+          width: 100vw;
           height: 100%;
+          padding: 0 30px;
           margin: 50px 0;
         `}
       >
@@ -114,7 +116,6 @@ export default function QnaPage() {
             line-height: 1.5;
             white-space: pre-wrap;
             text-align: center;
-            margin-bottom: 20px;
           `}
         >
           {QNA_LIST[step].question}
@@ -124,10 +125,10 @@ export default function QnaPage() {
             position: relative;
             width: 100%;
             aspect-ratio: 1.5/1;
-            margin-bottom: 30px;
+            margin: 30px 0 40px;
           `}
         >
-          <Image alt="cats" src="/images/main-image.jpg" fill />
+          <Image alt="description image" src={`/images/qna${step}.jpg`} fill />
         </div>
         <div
           css={css`
