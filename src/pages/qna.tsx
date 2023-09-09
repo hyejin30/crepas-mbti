@@ -120,27 +120,24 @@ export default function QnaPage() {
         >
           {QNA_LIST[step].question}
         </h2>
-        <div
-          css={css`
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1.5/1;
-            margin: 30px 0 40px;
-          `}
-        >
-          {step === 0 && (
-            <Image alt="description image" src="/images/qna0.jpg" fill />
-          )}
-          {step === 1 && (
-            <Image alt="description image" src="/images/qna1.jpg" fill />
-          )}
-          {step === 2 && (
-            <Image alt="description image" src="/images/qna2.jpg" fill />
-          )}
-          {step === 3 && (
-            <Image alt="description image" src="/images/qna3.jpg" fill />
-          )}
-        </div>
+        {QNA_LIST.map((_, index) => (
+          <div
+            key={`qna-${index}`}
+            css={css`
+              position: relative;
+              display: ${index === step ? "block" : "none"};
+              width: 100%;
+              aspect-ratio: 1.5/1;
+              margin: 30px 0 40px;
+            `}
+          >
+            <Image
+              alt="description image"
+              src={`/images/qna${step}.jpg`}
+              fill
+            />
+          </div>
+        ))}
         <div
           css={css`
             display: flex;
